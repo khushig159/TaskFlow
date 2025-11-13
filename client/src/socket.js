@@ -1,12 +1,13 @@
-// client/src/socket.js
 import { io } from 'socket.io-client';
 
-// Production mein backend same origin pe hai
-const URL = import.meta.env.DEV 
-  ? 'http://localhost:5000' 
-  : ''; // Same origin → /socket.io
+const SOCKET_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
-export const socket = io(URL, {
+export const socket = io(SOCKET_URL, {
   withCredentials: true,
-  transports: ['websocket', 'polling'],
+  transports: ['websocket']
+});
+
+// Optional: Debug
+socket.on('connect', () => {
+  console.log('Socket connected!');
 });

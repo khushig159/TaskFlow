@@ -13,7 +13,7 @@ const app = express();
 const httpServer=createServer(app)
 
 app.use(cors({
-  origin: ['https://taskflow-client-latest.onrender.com/','http://localhost', 'http://localhost:80', 'http://localhost:5173'],
+  origin: ['https://taskflow-client-latest.onrender.com','http://localhost', 'http://localhost:80', 'http://localhost:5173'],
   credentials: true,
 }));
 
@@ -22,7 +22,7 @@ app.use(cookieParser());
 
 const io = new Server(httpServer, {
   cors: {
-    origin: ['https://taskflow-client-latest.onrender.com/','http://localhost', 'http://localhost:80', 'http://localhost:5173'],
+    origin: ['https://taskflow-client-latest.onrender.com','http://localhost', 'http://localhost:80', 'http://localhost:5173'],
     credentials: true,
   },
 });

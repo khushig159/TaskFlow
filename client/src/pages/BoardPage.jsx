@@ -120,7 +120,7 @@ export default function BoardPage() {
     // Save to DB
     try {
       await axios.put(
-        `${import.meta.env.VITE_API_URL}:5000/api/boards/${boardId}/lists/${destination.droppableId}/cards/${draggableId}`,
+        `${import.meta.env.VITE_API_URL}/api/boards/${boardId}/lists/${destination.droppableId}/cards/${draggableId}`,
         { listId: destination.droppableId, position: destination.index },
         { withCredentials: true }
       );
