@@ -16,7 +16,7 @@ export default function Dashboard() {
 
   const fetchBoards = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/boards', { withCredentials: true });
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/boards`, { withCredentials: true });
       setBoards(res.data);
     } catch (err) {
       console.error(err);
@@ -26,7 +26,7 @@ export default function Dashboard() {
   const createBoard = async () => {
     if (!newBoardTitle.trim()) return;
     try {
-      const res = await axios.post('http://localhost:5000/api/boards', { title: newBoardTitle }, { withCredentials: true });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/boards`, { title: newBoardTitle }, { withCredentials: true });
       setBoards([...boards, res.data]);
       setNewBoardTitle('');
     } catch (err) {

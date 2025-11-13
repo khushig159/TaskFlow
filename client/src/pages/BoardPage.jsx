@@ -43,7 +43,7 @@ export default function BoardPage() {
   }, [boardId]);
 
   const fetchBoard = async () => {
-    const res = await axios.get(`http://localhost:5000/api/boards/${boardId}`, {
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/boards/${boardId}`, {
       withCredentials: true,
     });
     setBoard(res.data);
@@ -51,13 +51,13 @@ export default function BoardPage() {
 
   const fetchLists = async () => {
     const res = await axios.get(
-      `http://localhost:5000/api/boards/${boardId}/lists`,
+      `${import.meta.env.VITE_API_URL}/api/boards/${boardId}/lists`,
       { withCredentials: true }
     );
     const listsWithCards = await Promise.all(
       res.data.map(async (list) => {
         const cardsRes = await axios.get(
-          `http://localhost:5000/api/boards/${boardId}/lists/${list._id}/cards`,
+          `${import.meta.env.VITE_API_URL}/api/boards/${boardId}/lists/${list._id}/cards`,
           { withCredentials: true }
         );
         return { ...list, cards: cardsRes.data };
@@ -69,7 +69,7 @@ export default function BoardPage() {
   const createList = async () => {
     if (!newListTitle.trim()) return;
     const res = await axios.post(
-      `http://localhost:5000/api/boards/${boardId}/lists`,
+      `${import.meta.env.VITE_API_URL}/api/boards/${boardId}/lists`,
       { title: newListTitle },
       { withCredentials: true }
     );
@@ -81,7 +81,7 @@ export default function BoardPage() {
     const title = prompt("Card title:");
     if (!title?.trim()) return;
     const res = await axios.post(
-      `http://localhost:5000/api/boards/${boardId}/lists/${listId}/cards`,
+      `${import.meta.env.VITE_API_URL}/api/boards/${boardId}/lists/${listId}/cards`,
       { title },
       { withCredentials: true }
     );
@@ -120,7 +120,7 @@ export default function BoardPage() {
     // Save to DB
     try {
       await axios.put(
-        `http://localhost:5000/api/boards/${boardId}/lists/${destination.droppableId}/cards/${draggableId}`,
+        `${import.meta.env.VITE_API_URL}:5000/api/boards/${boardId}/lists/${destination.droppableId}/cards/${draggableId}`,
         { listId: destination.droppableId, position: destination.index },
         { withCredentials: true }
       );
