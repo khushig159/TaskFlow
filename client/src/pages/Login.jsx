@@ -28,7 +28,7 @@ export default function Login() {
       <div>
         {/* Logo */}
         <div className={styles.logo}>
-          <h1>TaskFlow!!!!</h1>
+          <h1>TaskFlow</h1>
           <p>Manage your projects beautifully</p>
         </div>
 
