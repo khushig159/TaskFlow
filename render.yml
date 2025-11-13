@@ -1,0 +1,28 @@
+# render.yaml
+services:
+  - type: web
+    name: taskflow-client
+    env: docker
+    dockerfilePath: ./client/Dockerfile
+    dockerContext: ./client
+    port: 80
+    plan: free
+
+  - type: web
+    name: taskflow-server
+    env: docker
+    dockerfilePath: ./server/Dockerfile
+    dockerContext: ./server
+    port: 5000
+    envVars:
+      - key: MONGODB_URI
+        value: mongodb+srv://khushig159:kishu@cicd.m2lebqn.mongodb.net/taskflow?retryWrites=true&w=majority/taskflow
+      - key: JWT_SECRET
+        value: supersecretkey123
+    plan: free
+
+  - type: pserv
+    name: taskflow-mongo
+    env: docker
+    image: mongo:7
+    plan: free
