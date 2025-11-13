@@ -44,7 +44,7 @@ export default function Login() {
                 <label className={styles.label}>Full Name</label>
                 <input
                   type="text"
-                  placeholder="Khushi Gupta"
+                  placeholder="John Doe"
                   value={form.name}
                   onChange={e => setForm({...form, name: e.target.value})}
                   className={styles.input}

@@ -17,17 +17,27 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Generate Unique Tag
+        run: echo "TAG=$(date +%s)" >> $GITHUB_ENV
+
       - name: Build & Push Client
         run: |
           docker build -t khushigupta159/taskflow-client:latest ./client
+          docker build -t khushigupta159/taskflow-client:${{ env.TAG }} ./client
           docker push khushigupta159/taskflow-client:latest
+          docker push khushigupta159/taskflow-client:${{ env.TAG }}
 
       - name: Build & Push Server
         run: |
           docker build -t khushigupta159/taskflow-server:latest ./server
+          docker build -t khushigupta159/taskflow-server:${{ env.TAG }} ./server
           docker push khushigupta159/taskflow-server:latest
+          docker push khushigupta159/taskflow-server:${{ env.TAG }}
 
-      - name: Trigger Render Deploy
+      - name: Trigger Render Deploy (Client)
         run: |
           curl -X POST ${{ secrets.RENDER_WEBHOOK_CLIENT }}
+
+      - name: Trigger Render Deploy (Server)
+        run: |
           curl -X POST ${{ secrets.RENDER_WEBHOOK_SERVER }}
